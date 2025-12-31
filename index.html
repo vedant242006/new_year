@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special New Year for You 💫</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Canvas for fireworks and confetti -->
+    <canvas id="fireworksCanvas"></canvas>
+    <canvas id="particleCanvas"></canvas>
+    
+    <!-- Music Control -->
+    <div class="music-control">
+        <button id="musicBtn" onclick="toggleMusic()">
+            <span id="musicIcon">🎵</span>
+            <span id="musicText">Play Music</span>
+        </button>
+        <audio id="bgMusic" loop>
+            <source src="background-music.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <!-- Section 1: Direct Greeting -->
+    <section id="greetingSection" class="section active">
+        <div class="greeting-container" data-aos="fade-up">
+            <h1 class="greeting-title">🎆 Happy New Year, <span id="userName">Sumaya</span>! 🎆</h1>
+            <p class="greeting-message">I made this just for you 💖</p>
+            <button onclick="nextSection('countdownSection')" class="continue-btn">Let's Begin 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 2: Countdown Timer -->
+    <section id="countdownSection" class="section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">Countdown to 2026 🎊</h2>
+            <div class="countdown-container" data-aos="zoom-in">
+                <div class="countdown-box">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+            <div id="countdownMessage" class="countdown-message"></div>
+            <button onclick="nextSection('memorySection')" class="continue-btn" data-aos="fade-up">Continue Exploring 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 3: Memory Timeline -->
+    <section id="memorySection" class="section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">Our Little Moments 💭</h2>
+            <div class="memory-timeline">
+                <div class="memory-card" data-aos="fade-right" data-aos-delay="100">
+                    <div class="memory-icon">🤝</div>
+                    <h3>The First Time We Talked</h3>
+                    <p>I still remember that moment...</p>
+                </div>
+                <div class="memory-card" data-aos="fade-left" data-aos-delay="200">
+                    <div class="memory-icon">😂</div>
+                    <h3>Our Stupid Laughs</h3>
+                    <p>No one gets our jokes like we do</p>
+                </div>
+                <div class="memory-card" data-aos="fade-right" data-aos-delay="300">
+                    <div class="memory-icon">🫠</div>
+                    <h3>Bus story...</h3>
+                    <p>I still remember that moment..</p>
+                </div>
+        
+
+            </div>
+            <button onclick="nextSection('secretSection')" class="continue-btn" data-aos="fade-up">Continue 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 4: Secret Message -->
+    <section id="secretSection" class="section">
+        <div class="container">
+            <div class="secret-card" data-aos="zoom-in">
+                <div class="lock-icon" id="lockIcon">🔒</div>
+                <h2 class="secret-title">Something I wanted to tell you...</h2>
+                <button onclick="revealSecret()" id="revealBtn" class="reveal-btn">
+                    Open Slowly 💌
+                </button>
+                <div id="secretMessage" class="secret-message hidden">
+                    <p class="typewriter" id="secretText"></p>
+                </div>
+            </div>
+            <button onclick="nextSection('wishSection')" class="continue-btn hidden" id="secretNextBtn">Continue 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 5: Wish Generator -->
+    <section id="wishSection" class="section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">Pick Your 2026 Vibe ✨</h2>
+            <div class="wish-buttons" data-aos="fade-up">
+                <button onclick="generateWish('funny')" class="wish-btn">😊 Funny</button>
+                <button onclick="generateWish('emotional')" class="wish-btn">💖 Emotional</button>
+                <button onclick="generateWish('motivation')" class="wish-btn">🔥 Motivation</button>
+            </div>
+            <div id="wishOutput" class="wish-output"></div>
+            <button onclick="nextSection('quizSection')" class="continue-btn" data-aos="fade-up">Continue 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 6: Friendship Quiz -->
+    <section id="quizSection" class="section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">Quick Quiz 😄</h2>
+            <div class="quiz-container" data-aos="fade-up">
+                <div class="quiz-question">
+                    <p>Who gets angry faster?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-option">Me</button>
+                        <button class="quiz-option">You</button>
+                        <button class="quiz-option">Both 😅</button>
+                    </div>
+                </div>
+                <div class="quiz-question">
+                    <p>Who texts first?</p>
+                    <div class="quiz-options">
+                        <button class="quiz-option">Me</button>
+                        <button class="quiz-option">You</button>
+                        <button class="quiz-option">Depends 📱</button>
+                    </div>
+                </div>
+                <div class="quiz-question">
+                    <p>Who cares more? (be honest 😏)</p>
+                    <div class="quiz-options">
+                        <button class="quiz-option">Me</button>
+                        <button class="quiz-option">You</button>
+                        <button class="quiz-option">Equal 💙</button>
+                    </div>
+                </div>
+            </div>
+            <div id="quizResult" class="quiz-result hidden">
+                <p class="quiz-message">Score doesn't matter...<br>What matters is that you mean a lot to me 💙</p>
+            </div>
+            <button onclick="nextSection('promiseSection')" class="continue-btn" data-aos="fade-up">Continue 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 7: Promise Section -->
+    <section id="promiseSection" class="section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">My Promises for 2026 💌</h2>
+            <div class="promise-container" data-aos="fade-up">
+                <label class="promise-item">
+                    <input type="checkbox" class="promise-checkbox">
+                    <span>More talks, deeper conversations</span>
+                </label>
+                <label class="promise-item">
+                    <input type="checkbox" class="promise-checkbox">
+                    <span>More memories together</span>
+                </label>
+                <label class="promise-item">
+                    <input type="checkbox" class="promise-checkbox">
+                    <span>Less misunderstandings</span>
+                </label>
+                <label class="promise-item">
+                    <input type="checkbox" class="promise-checkbox">
+                    <span>Always supporting each other</span>
+                </label>
+                <button onclick="savePromises()" class="save-promises-btn">Save Promises ✨</button>
+            </div>
+            <div id="promiseResult" class="promise-result hidden">
+                <p>Promise saved... with my heart 💖</p>
+            </div>
+            <button onclick="nextSection('fireworksSection')" class="continue-btn hidden" id="promiseNextBtn">Continue 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 8: Interactive Fireworks -->
+    <section id="fireworksSection" class="section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-down">Click Anywhere for Magic 🎆</h2>
+            <div class="fireworks-instruction" data-aos="fade-up">
+                <p>Tap the screen to create fireworks! ✨</p>
+                <p class="small-text">(Try clicking multiple times)</p>
+            </div>
+            <button onclick="nextSection('finalSection')" class="continue-btn" data-aos="fade-up">One Last Thing... 💫</button>
+        </div>
+    </section>
+
+    <!-- Section 9: Final Message -->
+    <section id="finalSection" class="section">
+        <div class="container">
+            <div class="final-message" data-aos="zoom-in" data-aos-duration="1500">
+                <h1 class="final-title">No matter what happens in 2025...</h1>
+                <h2 class="final-subtitle">I'm really glad you're in my life ❤️</h2>
+                <div class="final-signature">
+                    <p>Always,</p>
+                    <p class="signature-name">Your Friend 💫</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating emojis container -->
+    <div id="emojiContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
