@@ -80,14 +80,20 @@ function startCountdown() {
     updateCountdown(); // Update immediately
     countdownInterval = setInterval(updateCountdown, 1000); // Update every second
 }
-
 // Trigger massive celebration at midnight
 function triggerMidnightCelebration() {
     // Create celebration overlay
     const overlay = document.createElement('div');
     overlay.className = 'celebration-overlay';
-    overlay.innerHTML = '<h1 class="celebration-text">🎊 HAPPY NEW YEAR 2026! 🎊</h1>';
+    overlay.innerHTML = '<h1 class="celebration-text">🎊 HAPPY NEW YEAR 2026! 🎊<br><span style="font-size: 1.5rem; margin-top: 20px; display: block;">Tap anywhere to continue ✨</span></h1>';
     document.body.appendChild(overlay);
+    
+    // Click/Tap to close overlay
+    overlay.addEventListener('click', function() {
+        this.style.opacity = '0';
+        this.style.transition = 'opacity 0.5s ease';
+        setTimeout(() => this.remove(), 500);
+    });
     
     // Massive fireworks display
     let fireworkCount = 0;
@@ -109,12 +115,6 @@ function triggerMidnightCelebration() {
         fireworkCount++;
         if (fireworkCount > 20) {
             clearInterval(fireworkInterval);
-            // Remove overlay after 8 seconds
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                overlay.style.transition = 'opacity 2s ease';
-                setTimeout(() => overlay.remove(), 2000);
-            }, 8000);
         }
     }, 400);
     
@@ -123,7 +123,6 @@ function triggerMidnightCelebration() {
         toggleMusic();
     }
 }
-
 // ========== CANVAS SETUP ==========
 const fireworksCanvas = document.getElementById('fireworksCanvas');
 const fireworksCtx = fireworksCanvas.getContext('2d');
@@ -535,3 +534,4 @@ function savePromises() {
         alert('Please select at least one promise! 💖');
     }
 }
+
